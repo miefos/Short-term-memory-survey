@@ -106,7 +106,7 @@ function showResult() {
 }
 
 function calcID(resultString) {
-    return "jmuztb" + Number(resultString.split("/")[0]).toString(30) + "dzfxoj";
+    return "jm34uztb" + Number(resultString.split("/")[0]).toString(30) + "dzfxo873j";
 }
 
 
