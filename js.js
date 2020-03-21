@@ -1,7 +1,7 @@
 //
 // Initializations
 //
-let numOfDigits = [4];
+let numOfDigits = [4, 6, 8];
 let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
@@ -101,12 +101,12 @@ function showResult() {
         total += numOfDigits[i];
     }
     let resultString = totalCorrect + "/" + total;
-    resultDiv.append("<b>Total result: " + resultString) + "</b> <br /> <br />";
+    resultDiv.append("<b>Total result: " + resultString + "</b> <br /> <br />");
     resultDiv.append("Your ID is: " + calcID(resultString));
 }
 
 function calcID(resultString) {
-    return Number(12).toString(28).toUpperCase();
+    return Number(resultString.split("/")[0]).toString(28).toUpperCase();
 }
 
 
