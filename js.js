@@ -2,11 +2,13 @@
 // Initializations
 //
 let numOfDigits = [4, 6, 8];
+let timeForEach = [1, 1.2, 1.8];
 let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
 let resultArray = [];
 let resultDigits = [];
+
 
 function initializeNumbers() {
     let returnVal = [];
@@ -60,7 +62,7 @@ function showExercise() {
     setTimeout(function () {
         $("#Exercise").hide();
         showAnswerSheet(numbers[currentExercise].length)
-    }, 1500)
+    }, timeforEach[currentExercise])
 }
 
 
