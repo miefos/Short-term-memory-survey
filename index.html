@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Short term memory test</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!--[if IE]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 mt-5">
+                <h1>Short-term memory test</h1>
+                <div id="intro">
+                    <p class="lead">Hi! The test will consist of 2 exercises and 1 survey. You will start with the survey and then continue with exercises. The exercises will start with a short description and sample exercise which will not be counted in the result.</p>
+                    <form id="startForm" method="POST">
+                        <div class="form-group">
+                            <input autofocus type="text" class="form-control" id="participantIDInput" aria-describedby="idhelp" placeholder="Enter your ID">
+                            <small id="idhelp" class="form-text text-muted">ID was provided in Google Forms.</small>
+                        </div>
+                        <button id="start" type="submit" class="btn btn-primary">Start</button>
+                    </form>
+                </div>
+                <div id="test" style="display: none;">
+                    <div class="lead" id="participantId"></div>
+                    <div id="Exercise">
+                        <h2 class="theNumbers"></h2>
+                    </div>
+                    <div id="result" style="display: none;">
+                        <h2>Results:</h2>
+                    </div>
+                    <div id="answerSheet" style="display: none;">
+                        <form id="answerSheetForm" method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Answer (<span id="numOfDigits"></span>&nbsp;digits)</span>
+                                </div>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" id="answerInput" style="letter-spacing: 4px; font-size: 22px; " type="number" class="form-control" placeholder="Answer" aria-label="Answer">
+                            </div>
+                            <button id="submitAnswer" type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="js.js"></script>
+</body>
+
+</html>
