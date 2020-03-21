@@ -10,12 +10,9 @@ let resultDigits = [];
 
 
 $("#startForm").on("submit", function () {
-    console.log("Starting...");
-    let participantID = $("#participantIDInput").val();
-    console.log(participantID);
     $("#intro").hide();
     $("#test").show();
-    initFirstExercise(participantID);
+    initFirstExercise();
     return false;
 });
 
@@ -51,16 +48,15 @@ $("#answerSheetForm").on("submit", function (e) {
 function calculateResult(correctDigits, answerDigits) {
     let correct = 0;
     for (let i = 0; i < correctDigits.length; i++) {
-        if (correctDigits[i] == answerDigits[i]) {
+        if (correctDigits[i] === answerDigits[i]) {
             correct++;
         }
     }
     return correct;
 }
 
-function initFirstExercise(participantID) {
-    $("#participantId").html("<b>ID: </b>" + participantID);
-    currentExercise += 1
+function initFirstExercise() {
+    currentExercise += 1;
     showExercise();
     setTimeout(function () {
         $("#Exercise").hide();
@@ -100,7 +96,7 @@ function showAnswerSheet(numOfDigits) {
 
 
 function generateRandomDigits(numOfDigits) {
-    let returnVal = ""
+    let returnVal = "";
     for (let i = 0; i < numOfDigits; i++) {
         let num = Math.floor((Math.random() * 10)); // Random from 0 to 10
         returnVal += num;
