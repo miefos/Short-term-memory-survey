@@ -1,100 +1,116 @@
-let numbers = [generateRandomDigits(4), // Not used currently but needed
-              generateRandomDigits(6),
-              generateRandomDigits(7),
-              generateRandomDigits(10)];
+//
+// Initializations
+//
+let numOfDigits = [4];
+let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
 let resultArray = [];
 let resultDigits = [];
 
+function initializeNumbers() {
+    let returnVal = [];
+    for (let i = 0; i < numOfDigits.length; i++) {
+        returnVal.push(generateRandomDigits(numOfDigits[i]));
+    }
+    return returnVal;
+}
 
-
-$("#startForm").on("submit", function () {
+//
+// Event handlers
+//
+$("#start").on("click", function () {
     $("#intro").hide();
     $("#test").show();
-    initFirstExercise();
+    showExercise();
     return false;
 });
 
+
 $("#answerSheetForm").on("submit", function (e) {
     let answer = $("#answerInput").val();
-    let currentDigits = numbers[currentExercise];
-    console.log("Submitted... (Exercise " + currentExercise + " with answer " + answer + "... correct is " + currentDigits + ")");
+    let result = calculateResult(answer);
+    resultArray.push(result);
     resultDigits.push({
         "correct": numbers[currentExercise],
         "answer": answer
     });
-    let result = calculateResult(currentDigits, answer);
-    let resultString = result + "/" + currentDigits.length
-    console.log("Result: " + resultString);
-    resultArray.push(resultString);
-    console.log(resultArray);
-    $("#Exercise").hide();
     currentExercise++;
-    console.log("Current exercise " + currentExercise + " from " + maxExercise + " exercises.");
-    $("#answerSheet").hide();
     if (currentExercise < maxExercise) {
         showExercise();
-        setTimeout(function () {
-            $("#Exercise").hide();
-            showAnswerSheet(currentDigits.length)
-        }, 1500)
     } else {
         showResult();
     }
     return false;
 });
 
-function calculateResult(correctDigits, answerDigits) {
-    let correct = 0;
-    for (let i = 0; i < correctDigits.length; i++) {
-        if (correctDigits[i] === answerDigits[i]) {
-            correct++;
-        }
-    }
-    return correct;
-}
 
-function initFirstExercise() {
-    currentExercise += 1;
-    showExercise();
+//
+// Functions
+//
+function showExercise() {
+    // Hide answer sheet
+    $("#answerSheet").hide();
+
+    // Show exercise
+    $("#Exercise").show();
+    $("#Exercise h2").html(numbers[currentExercise]);
+
+    // Timeout to hide exercise
     setTimeout(function () {
         $("#Exercise").hide();
         showAnswerSheet(numbers[currentExercise].length)
     }, 1500)
 }
 
-function showResult() {
-    $("#Exercise").hide();
-    $("#result").show();
-    //console.log(resultArray);
-    let totalCorrect = 0
-    let total = 0
-    for (let i = 0; i < resultArray.length; i++) {
-        // Show each exercise result
-        $("#result").append("<b>Exercise " + (i + 1) + " result is " + resultArray[i] + ".</b> Correct was: " + resultDigits[i]["correct"] + " You answered: " + resultDigits[i]["answer"] + "<br />");
-        // Add to total result
-        let res = resultArray[i].split("/"); // 0th element is correctly answered, 1th element is total digits
-        totalCorrect += parseInt(res[0]);
-        total += parseInt(res[1]);
-    }
-    $("#result").append("<b>Total result: " + totalCorrect + "/" + total) + "</b>";
-}
-
-function showExercise() {
-    $("#Exercise").show();
-    $("#Exercise h2").html(numbers[currentExercise]);
-}
 
 function showAnswerSheet(numOfDigits) {
-    $("#answerInput").val("");
+    let answerInput = $("#answerInput");
+    answerInput.val("");
+    answerInput.attr("maxlength", numOfDigits);
     $("#numOfDigits").text(numOfDigits);
-    $("#answerInput").attr("maxlength", numOfDigits);
     $("#answerSheet").show();
-    $("#answerInput").focus();
+    answerInput.focus();
 }
 
 
+function calculateResult(answerDigits) {
+    let correct = 0;
+    for (let i = 0; i < numbers[currentExercise].length; i++) {
+        if (numbers[currentExercise][i] === answerDigits[i]) {
+            correct++;
+        }
+    }
+    return correct;
+}
+
+
+function showResult() {
+    let resultDiv = $("#result");
+    $("#answerSheet").hide();
+    $("#Exercise").hide();
+    resultDiv.show();
+    //console.log(resultArray);
+    let totalCorrect = 0;
+    let total = 0;
+    for (let i = 0; i < resultArray.length; i++) {
+        // Show each exercise result
+        resultDiv.append("<b>Exercise " + (i + 1) + " result is " + resultArray[i] + "/" + numOfDigits[i]  + ".</b> Pattern was: " + resultDigits[i]["correct"] + " You answered: " + resultDigits[i]["answer"] + "<br />");
+        // Add to total result
+        totalCorrect += resultArray[i];
+        total += numOfDigits[i];
+    }
+    let resultString = totalCorrect + "/" + total;
+    resultDiv.append("<b>Total result: " + resultString) + "</b> <br /> <br />";
+    resultDiv.append("Your ID is: " + calcID(resultString));
+}
+
+function calcID(resultString) {
+    return Number(12).toString(28).toUpperCase();
+}
+
+
+// Random number generator
 function generateRandomDigits(numOfDigits) {
     let returnVal = "";
     for (let i = 0; i < numOfDigits; i++) {
