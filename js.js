@@ -62,7 +62,7 @@ function showExercise() {
     setTimeout(function () {
         $("#Exercise").hide();
         showAnswerSheet(numbers[currentExercise].length)
-    }, timeforEach[currentExercise])
+    }, timeForEach[currentExercise])
 }
 
 
