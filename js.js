@@ -101,12 +101,12 @@ function showResult() {
         total += numOfDigits[i];
     }
     let resultString = totalCorrect + "/" + total;
-    resultDiv.append("<b>Total result: " + resultString + "</b> <br /> <br />");
-    resultDiv.append("Your ID is: " + calcID(resultString));
+    resultDiv.append("<b>Total result: " + resultString + "</b> <br />");
+    resultDiv.append("Your ID is: <b>" + calcID(resultString) + "</b>");
 }
 
 function calcID(resultString) {
-    return "jm34uztb" + Number(resultString.split("/")[0]).toString(30) + "dzfxo873j";
+    return ("jm34uztb" + Number(resultString.split("/")[0]).toString(30) + "dzfxo873j").toUpperCase();
 }
 
 
