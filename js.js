@@ -2,7 +2,7 @@
 // Initializations
 //
 let numOfDigits = [4, 6, 8];
-let timeForEach = [1, 1.2, 5];
+let timeForEach = [1, 1.2, 1.8];
 let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
