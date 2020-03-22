@@ -118,8 +118,8 @@ function showResult() {
         // Show each exercise result
         resultDiv.append("<b>Exercise " + (i + 1) + " result is " + resultArray[i] + "/" + numOfDigits[i]  + ".</b> Pattern was: " + resultDigits[i]["correct"] + " You answered: " + resultDigits[i]["answer"] + "<br />");
         // Add to total result
-        totalCorrect += resultArray[i];
-        total += numOfDigits[i];
+        totalCorrect += parseInt(resultArray[i]);
+        total += parseInt(numOfDigits[i]);
     }
     let resultString = totalCorrect + "/" + total;
     resultDiv.append("<b>Total result: " + resultString + "</b> <br />");
