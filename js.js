@@ -28,6 +28,25 @@ $("#start").on("click", function () {
     return false;
 });
 
+$("#startAdmin").on("click", function () {
+    // Initialize values
+    numOfDigits = [];
+    timeForEach = [];
+    let numOfDigitsFromInput = $("#numDig").val().trim();
+    let timeForEachFromInput = $("#numTime").val().trim();
+    numOfDigits = numOfDigitsFromInput.split(",");
+    timeForEach = timeForEachFromInput.split(",");
+
+    numbers = initializeNumbers();
+    maxExercise = numbers.length;
+
+
+    $("#intro").hide();
+    $("#test").show();
+    showExercise();
+    return false;
+});
+
 
 $("#answerSheetForm").on("submit", function (e) {
     let answer = $("#answerInput").val();
