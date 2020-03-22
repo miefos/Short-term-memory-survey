@@ -8,6 +8,7 @@ let currentExercise = 0;
 let maxExercise = numbers.length;
 let resultArray = [];
 let resultDigits = [];
+let custom = false;
 
 
 function initializeNumbers() {
@@ -44,6 +45,7 @@ $("#startAdmin").on("click", function () {
     $("#intro").hide();
     $("#test").show();
     showExercise();
+    custom = true;
     return false;
 });
 
@@ -123,7 +125,11 @@ function showResult() {
     }
     let resultString = totalCorrect + "/" + total;
     resultDiv.append("<b>Total result: " + resultString + "</b> <br />");
-    resultDiv.append("Your ID is: <b>" + calcID(resultString) + "</b>");
+    if (!custom) {
+        $("#googleFormsIframe").attr("src", "https://docs.google.com/forms/d/e/1FAIpQLSezcjBmWxGdiYZvbwxR-yjf_zaxbMauHvn6g-5WwO3ADbR9dw/viewform?entry.2005620554=" + calcID(resultString));
+        $("#googleFormsIframeWrap").show();
+        // resultDiv.append("Your ID is: <b>" + calcID(resultString) + "</b>");
+    }
 }
 
 function calcID(resultString) {
