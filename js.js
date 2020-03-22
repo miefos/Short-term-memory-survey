@@ -2,8 +2,8 @@
 // Initializations
 //
 let custom = false;
-let numOfDigits = [3,3,4,4,5,5,6,6,7,7]; // 10
-let timeForEach = [0.8,0.8,1,1,1.2,1.2,1.4,1.4,1.6,1.6];
+let numOfDigits = [4,5,6,6,7,7,8,8,9,9,10,10,11]; // 10
+let timeForEach = initTime(0.8, 0.1);
 let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
@@ -16,6 +16,14 @@ function initializeNumbers() {
     let returnVal = [];
     for (let i = 0; i < numOfDigits.length; i++) {
         returnVal.push(generateRandomDigits(numOfDigits[i]));
+    }
+    return returnVal;
+}
+
+function initTime(starting, perLevel) {
+    let returnVal = [];
+    for (let i = 0; i < numOfDigits.length; i++) {
+        returnVal.push(starting + perLevel * i);
     }
     return returnVal;
 }
@@ -163,8 +171,8 @@ function generateRandomDigits(numOfDigits) {
         let num;
         do {
             num = Math.floor((Math.random() * 10)); // Random from 0 to 9
-            if (custom) console.log(num + " " + returnVal[i-1]);
-        } while (num === parseInt(returnVal[i-1]));
+        } while ((num === parseInt(returnVal[i-1]) && num === parseInt(returnVal[i-2]) && numOfDigits > 8) ||
+                (num === parseInt(returnVal[i-1]) && numOfDigits < 8));
         returnVal += num;
     }
     return returnVal;
