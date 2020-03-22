@@ -9,6 +9,7 @@ let currentExercise = 0;
 let maxExercise = numbers.length;
 let resultArray = [];
 let resultDigits = [];
+let showGetReadyForMiliseconds = 2000;
 
 
 function initializeNumbers() {
@@ -23,9 +24,22 @@ function initializeNumbers() {
 // Event handlers
 //
 $("#start").on("click", function () {
+    let msecLeft = showGetReadyForMiliseconds;
     $("#intro").hide();
-    $("#test").show();
-    showExercise();
+    $("#getReady").show();
+    showGetReady(msecLeft);
+    msecLeft-=1000;
+    let ccc = setInterval(function() {
+        showGetReady(msecLeft);
+        if (msecLeft <= 0) {
+            $("#getReady").hide();
+            $("#test").show();
+            showExercise();
+            clearInterval(ccc);
+        }
+        msecLeft-=1000;
+    }, 1000);
+
     return false;
 });
 
@@ -40,9 +54,9 @@ $("#startAdmin").on("click", function () {
 
     timeForEach = timeForEachFromInput.split(",");
     numbers = initializeNumbers();
-
-
     maxExercise = numbers.length;
+
+
     $("#intro").hide();
     $("#test").show();
     showExercise();
@@ -71,6 +85,11 @@ $("#answerSheetForm").on("submit", function (e) {
 //
 // Functions
 //
+function showGetReady(secs) {
+    $("#getReady").html("Get Ready... " + Math.floor(secs/1000));
+}
+
+
 function showExercise() {
     // Hide answer sheet
     $("#answerSheet").hide();
