@@ -22,15 +22,16 @@
         <div class="row justify-content-center">
             <div class="col-10 mt-5">
                 <h1>Short-term memory test</h1>
-                <div id="intro">
-                    <p class="mutted">We are RTU and LU BITL students from RBS, this questionnaire consist of test and survey. Questionnaire will be used for gathering data for a psychology research project. The aim of the research project is to determine the correlation between stress and short- term memory. The results will not be public and will be presented to a narrow, selected audience. Test consist of a number of short-term memory exercises about memorizing short written text or numbers. The survey consist of ten questions where respondent is required to evaluate the frequency of experiencing a particular emotions. The approximate time to complete the test and survey is 10 minutes. Test and survey have detailed instructions for execution.</p>
-                    <p class="lead">You are about to do a small short term memory test. A few digits will flash on your computer monitor for 1.5 seconds. Your job is to write down as many digits as you can remember after they disappear.</p>
+                <div class="intro">
+                    <p class="lead">A few digits will flash on your computer monitor for a seconds. Your job is to write down as many digits as you can remember after they disappear.</p>
+                    <p class="lead" id="descriptionAboutExercises" style="display:none;">You will have <span id="numOfExercises"></span> exercises with <span id="numOfDigitsInfoMin"></span> to <span id="numOfDigitsInfoMax"></span> digits and time <span id="startingTime"></span> second(s) and on each next exercise the time will increase by <span id="increaseTime"></span> second(s).</p>
 <!--                    <form id="startForm" method="POST">-->
 <!--                        <div class="form-group">-->
 <!--                            <input autofocus type="text" class="form-control" id="participantIDInput" aria-describedby="idhelp" placeholder="Enter your ID">-->
 <!--                            <small id="idhelp" class="form-text text-muted">ID was provided in Google Forms.</small>-->
 <!--                        </div>-->
-                        <button id="start" type="submit" class="btn btn-primary">Start</button>
+                        <button id="start" type="submit" class="btn btn-primary">Start Test</button>
+                        <button id="startSample" type="submit" class="btn btn-primary">Start Sample Test</button>
                     <small id="idhelp" class="form-text text-muted">Prefer customized test? <a href="https://miefos.github.io/Short-term-memory-survey/admin.html">Click here to customize your test.</a>.</small>
 
                     <!--                    </form>-->
@@ -66,6 +67,9 @@
                 <br />
                 <br />
                 <br />
+                <br />
+                <br />
+                <p class="small intro">We are RTU and LU BITL students from RBS, this questionnaire consist of test and survey. Questionnaire will be used for gathering data for a psychology research project. The aim of the research project is to determine the correlation between stress and short- term memory. The results will not be public and will be presented to a narrow, selected audience. Test consist of a number of short-term memory exercises about memorizing short written text or numbers. The survey consist of ten questions where respondent is required to evaluate the frequency of experiencing a particular emotions. The approximate time to complete the test and survey is 10 minutes. Test and survey have detailed instructions for execution.</p>
             </div>
         </div>
     </div>

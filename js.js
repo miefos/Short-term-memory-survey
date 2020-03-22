@@ -2,15 +2,28 @@
 // Initializations
 //
 let custom = false;
-let numOfDigits = [4,5,6,6,7,7,8,8,9,9,10,10,11]; // 10
-let timeForEach = initTime(0.8, 0.1);
+let sample = false;
+let numOfDigits = [4,5,6,6,7,7,8,8,8,9,9,10];
+let startingTime = 0.8;
+let increasePerLevelTime = 0.2;
+let timeForEach = initTime(startingTime, increasePerLevelTime);
 let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
 let resultArray = [];
 let resultDigits = [];
-let showGetReadyForMiliseconds = 2000;
+let showGetReadyForMiliseconds = 1001;
 
+populateDescription();
+
+function populateDescription() {
+    $("#increaseTime").html(increasePerLevelTime);
+    $("#startingTime").html(startingTime);
+    $("#numOfDigitsInfoMin").html(Math.min.apply(Math, numOfDigits));
+    $("#numOfDigitsInfoMax").html(Math.max.apply(Math, numOfDigits));
+    $("#numOfExercises").html(numOfDigits.length);
+    $("#descriptionAboutExercises").show();
+}
 
 function initializeNumbers() {
     let returnVal = [];
@@ -33,7 +46,36 @@ function initTime(starting, perLevel) {
 //
 $("#start").on("click", function () {
     let msecLeft = showGetReadyForMiliseconds;
-    $("#intro").hide();
+    $(".intro").hide();
+    $("#getReady").show();
+    showGetReady(msecLeft);
+    msecLeft-=1000;
+    let ccc = setInterval(function() {
+        showGetReady(msecLeft);
+        if (msecLeft <= 0) {
+            $("#getReady").hide();
+            $("#test").show();
+            showExercise();
+            clearInterval(ccc);
+        }
+        msecLeft-=1000;
+    }, 1000);
+
+    return false;
+});
+
+$("#startSample").on("click", function () {
+    custom = true;
+    sample = true;
+
+    numOfDigits = [2, 4, 6];
+    timeForEach = [1, 1, 1];
+
+    numbers = initializeNumbers();
+    maxExercise = numbers.length;
+
+    let msecLeft = showGetReadyForMiliseconds;
+    $(".intro").hide();
     $("#getReady").show();
     showGetReady(msecLeft);
     msecLeft-=1000;
@@ -59,13 +101,13 @@ $("#startAdmin").on("click", function () {
     let numOfDigitsFromInput = $("#numDig").val().trim();
     let timeForEachFromInput = $("#numTime").val().trim();
     numOfDigits = numOfDigitsFromInput.split(",");
-
     timeForEach = timeForEachFromInput.split(",");
+
     numbers = initializeNumbers();
     maxExercise = numbers.length;
 
 
-    $("#intro").hide();
+    $(".intro").hide();
     $("#test").show();
     showExercise();
     return false;
@@ -94,7 +136,7 @@ $("#answerSheetForm").on("submit", function (e) {
 // Functions
 //
 function showGetReady(secs) {
-    $("#getReady").html("Get Ready... " + Math.floor(secs/1000));
+    $("#getReady").html("Get Ready... " + Math.ceil(secs/1000));
 }
 
 
@@ -156,6 +198,9 @@ function showResult() {
         $("#googleFormsIframe").attr("src", "https://docs.google.com/forms/d/e/1FAIpQLSezcjBmWxGdiYZvbwxR-yjf_zaxbMauHvn6g-5WwO3ADbR9dw/viewform?entry.2005620554=" + calcID(resultString));
         $("#googleFormsIframeWrap").show();
         // resultDiv.append("Your ID is: <b>" + calcID(resultString) + "</b>");
+    }
+    if (sample) {
+        resultDiv.append("<a href=\"https://miefos.github.io/Short-term-memory-survey\"><button id=\"backToMain\" type=\"submit\" class=\"btn btn-primary\">Back to main page</button></a>");
     }
 }
 
