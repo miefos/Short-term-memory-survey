@@ -2,8 +2,8 @@
 // Initializations
 //
 let custom = false;
-let numOfDigits = [4, 6, 8];
-let timeForEach = [1, 1.2, 1.8];
+let numOfDigits = [3,3,4,4,5,5,6,6,7,7]; // 10
+let timeForEach = [0.8,0.8,1,1,1.2,1.2,1.4,1.4,1.6,1.6];
 let numbers = initializeNumbers();
 let currentExercise = 0;
 let maxExercise = numbers.length;
