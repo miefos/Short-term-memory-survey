@@ -1,6 +1,7 @@
 //
 // Initializations
 //
+let custom = false;
 let numOfDigits = [4, 6, 8];
 let timeForEach = [1, 1.2, 1.8];
 let numbers = initializeNumbers();
@@ -8,7 +9,6 @@ let currentExercise = 0;
 let maxExercise = numbers.length;
 let resultArray = [];
 let resultDigits = [];
-let custom = false;
 
 
 function initializeNumbers() {
@@ -30,22 +30,22 @@ $("#start").on("click", function () {
 });
 
 $("#startAdmin").on("click", function () {
+    custom = true;
     // Initialize values
     numOfDigits = [];
     timeForEach = [];
     let numOfDigitsFromInput = $("#numDig").val().trim();
     let timeForEachFromInput = $("#numTime").val().trim();
     numOfDigits = numOfDigitsFromInput.split(",");
+
     timeForEach = timeForEachFromInput.split(",");
-
     numbers = initializeNumbers();
+
+
     maxExercise = numbers.length;
-
-
     $("#intro").hide();
     $("#test").show();
     showExercise();
-    custom = true;
     return false;
 });
 
@@ -141,7 +141,11 @@ function calcID(resultString) {
 function generateRandomDigits(numOfDigits) {
     let returnVal = "";
     for (let i = 0; i < numOfDigits; i++) {
-        let num = Math.floor((Math.random() * 10)); // Random from 0 to 10
+        let num;
+        do {
+            num = Math.floor((Math.random() * 10)); // Random from 0 to 9
+            if (custom) console.log(num + " " + returnVal[i-1]);
+        } while (num === parseInt(returnVal[i-1]));
         returnVal += num;
     }
     return returnVal;
