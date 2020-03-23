@@ -40,7 +40,7 @@ function initTime(starting, perLevel) {
         if (i < 5) {
             returnVal.push(starting + perLevel * i);
         } else {
-            returnVal.push(starting[i-1] + perLevel * i * 4);
+            returnVal.push(starting + perLevel * i * 2);
         }
     }
     return returnVal;
