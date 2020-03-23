@@ -3,6 +3,7 @@
 //
 let custom = false;
 let sample = false;
+let firstExercise = true;
 let numOfDigits = [4,5,6,6,7,7,8,8,8,9,9,10];
 let startingTime = 0.8;
 let increasePerLevelTime = 0.2;
@@ -45,9 +46,16 @@ function initTime(starting, perLevel) {
 // Event handlers
 //
 $("#start").on("click", function () {
-    let msecLeft = showGetReadyForMiliseconds;
     $(".intro").hide();
+    startTheTest();
+
+    return false;
+});
+
+function startTheTest() {
+    let msecLeft = showGetReadyForMiliseconds;
     $("#getReady").show();
+    $("#answerSheet").hide();
     showGetReady(msecLeft);
     msecLeft-=1000;
     let ccc = setInterval(function() {
@@ -57,12 +65,12 @@ $("#start").on("click", function () {
             $("#test").show();
             showExercise();
             clearInterval(ccc);
+            firstExercise = false;
         }
         msecLeft-=1000;
     }, 1000);
 
-    return false;
-});
+}
 
 $("#startSample").on("click", function () {
     custom = true;
@@ -124,7 +132,7 @@ $("#answerSheetForm").on("submit", function (e) {
     });
     currentExercise++;
     if (currentExercise < maxExercise) {
-        showExercise();
+        startTheTest();
     } else {
         showResult();
     }
@@ -136,7 +144,11 @@ $("#answerSheetForm").on("submit", function (e) {
 // Functions
 //
 function showGetReady(secs) {
-    $("#getReady").html("Get Ready... " + Math.ceil(secs/1000));
+    if (firstExercise) {
+        $("#getReady").html("Get Ready for the Test... " + Math.ceil(secs / 1000));
+    } else {
+        $("#getReady").html("Exercise " + currentExercise + " ... " + Math.ceil(secs / 1000));
+    }
 }
 
 
