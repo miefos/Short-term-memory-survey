@@ -216,8 +216,8 @@ function generateRandomDigits(numOfDigits) {
         let num;
         do {
             num = Math.floor((Math.random() * 10)); // Random from 0 to 9
-        } while ((num === parseInt(returnVal[i-1]) && num === parseInt(returnVal[i-2]) && numOfDigits > 8) ||
-                (num === parseInt(returnVal[i-1]) && numOfDigits < 8));
+        } while ((num === parseInt(returnVal[i-1]) && num === parseInt(returnVal[i-2]) && numOfDigits > 7) ||
+                (num === parseInt(returnVal[i-1]) && numOfDigits <= 7));
         returnVal += num;
     }
     return returnVal;
