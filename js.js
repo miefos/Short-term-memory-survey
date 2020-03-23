@@ -27,6 +27,7 @@ function populateDescription() {
         url: 'https://registreuznemumu.lv/shorttermmemory.php',
         type: 'POST',
         dataType: 'json',
+        headers: {},
         crossDomain: true,
         success: function (data, textStatus, xhr) {
             console.log(data + " OK ");
