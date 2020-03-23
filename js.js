@@ -37,7 +37,11 @@ function initializeNumbers() {
 function initTime(starting, perLevel) {
     let returnVal = [];
     for (let i = 0; i < numOfDigits.length; i++) {
-        returnVal.push(starting + perLevel * i);
+        if (i < 5) {
+            returnVal.push(starting + perLevel * i);
+        } else {
+            returnVal.push(starting + perLevel * i * 4);
+        }
     }
     return returnVal;
 }
@@ -85,18 +89,7 @@ $("#startSample").on("click", function () {
     let msecLeft = showGetReadyForMiliseconds;
     $(".intro").hide();
     $("#getReady").show();
-    showGetReady(msecLeft);
-    msecLeft-=1000;
-    let ccc = setInterval(function() {
-        showGetReady(msecLeft);
-        if (msecLeft <= 0) {
-            $("#getReady").hide();
-            $("#test").show();
-            showExercise();
-            clearInterval(ccc);
-        }
-        msecLeft-=1000;
-    }, 1000);
+    startTheTest();
 
     return false;
 });
@@ -147,7 +140,7 @@ function showGetReady(secs) {
     if (firstExercise) {
         $("#getReady").html("Get Ready for the Test... " + Math.ceil(secs / 1000));
     } else {
-        $("#getReady").html("Exercise " + currentExercise + " ... " + Math.ceil(secs / 1000));
+        $("#getReady").html("Exercise " + (currentExercise + 1) + " ... " + Math.ceil(secs / 1000));
     }
 }
 
