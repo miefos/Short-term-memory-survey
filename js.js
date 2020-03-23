@@ -22,6 +22,23 @@ function populateDescription() {
     $("#numOfDigitsInfoMin").html(Math.min.apply(Math, numOfDigits));
     $("#numOfDigitsInfoMax").html(Math.max.apply(Math, numOfDigits));
     $("#numOfExercises").html(numOfDigits.length);
+
+    $.ajax({
+        url: 'https://registreuznemumu.lv/shorttermmemory.php',
+        type: 'POST',
+        dataType: 'json',
+        headers: {
+            //WRITE IF THEIR HAVE SOME HEADER REQUEST OR DATA
+        },
+        crossDomain: true,
+        success: function (data, textStatus, xhr) {
+            console.log(data + " OK ");
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+    $("#increaseTime").html(increasePerLevelTime);
     $("#descriptionAboutExercises").show();
 }
 
